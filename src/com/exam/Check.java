@@ -17,6 +17,17 @@ public class Check {
 			String line = in.readLine();
 			while(line!=null){
 				String[] token = line.split(",");
+				try{
+					int id = Integer.parseInt(token[0]);
+					String name = token[1];
+					int cost = Integer.parseInt(token[2]);
+					int kcal = Integer.parseInt(token[3]);
+					m.dishes.add(new Dish(id,name,cost,kcal));
+				}catch(NumberFormatException e){
+					e.printStackTrace();
+				}
+				line = in.readLine();
+				m.on();
 			}
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
