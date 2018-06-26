@@ -9,6 +9,7 @@ public class Main {
 	List<Kart> karts = new ArrayList<>();
 	boolean check = true;
 	boolean addkart = true;
+	boolean askcount = false;
 	int kcals = 0;
 	int costs = 0;
 	public Main(){
@@ -39,18 +40,28 @@ public class Main {
 					String name = d.getName();
 					int kcals = d.getKcal();
 					int costs = d.getCost();
-					System.out.println("請輸入數量：");
-					String count = sc.nextLine();
-					int nums = Integer.parseInt(count);
-					kcals = kcals*nums;
-					costs = costs*nums;
-					karts.add(new Kart(name,nums,costs,kcals));
-					System.out.println("目前餐點：");
-					for(int i=0;i<karts.size();i++){
-						Kart k = karts.get(i);
-						System.out.println((i+1)+"."+k.getName()+k.getNums()+"份");
-					}
-					System.out.println("=============");
+					do {
+						askcount = true;
+						System.out.println("請輸入數量：");
+						try {
+							String in = sc.nextLine();
+							int nums = Integer.parseInt(in);
+							kcals = kcals * nums;
+							costs = costs * nums;
+							karts.add(new Kart(name, nums, costs, kcals));
+							System.out.println("目前餐點：");
+							for (int i = 0; i < karts.size(); i++) {
+								Kart k = karts.get(i);
+								System.out.println((i + 1) + "." + k.getName() + k.getNums() + "份");
+							}
+							System.out.println("=============");
+							askcount = false;
+						} catch (NumberFormatException e) {
+							// TODO Auto-generated catch block
+							System.out.println("[數量錯誤]");
+							askcount = true;
+						} 
+					} while (askcount);
 					break;
 				case "0":
 					System.out.println("目前餐點：");
