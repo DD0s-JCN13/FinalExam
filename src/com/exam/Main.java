@@ -40,8 +40,8 @@ public class Main {
 					int kcals = d.getKcal();
 					int costs = d.getCost();
 					System.out.println("請輸入數量：");
-					String intput = sc.nextLine();
-					int nums = Integer.parseInt(input);
+					String count = sc.nextLine();
+					int nums = Integer.parseInt(count);
 					kcals = kcals*nums;
 					costs = costs*nums;
 					karts.add(new Kart(name,nums,costs,kcals));
@@ -55,17 +55,26 @@ public class Main {
 				case "0":
 					System.out.println("目前餐點：");
 					int total = 0;
+					int totkcal = 0;
 					for(int i=0;i<karts.size();i++){
 						Kart k = karts.get(i);
 						System.out.println((i+1)+"."+k.getName()+k.getNums()+"份");
 						total = total + k.getCosts();
+						totkcal = totkcal + k.getKcals();
 					}
 					System.out.println("合計： "+ total+"元");
+					if(totkcal>=1200){
+						System.out.println("高熱量餐點");
+					}
 					addkart = false;
 					check = false;
 					break;
 				case "q":
 					check = false;
+					addkart = false;
+					break;
+				default:
+					System.out.println("[無此餐點]");
 					break;
 				}
 			}
